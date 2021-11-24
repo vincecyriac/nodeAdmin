@@ -32,7 +32,7 @@ module.exports = {
     );
   },
 
-  //get admin by email
+  //get admin by userName
   getAdminByUsername: (email, callback) => {
     pool.query(
       "SELECT * FROM `admin` WHERE userName = ?",
