@@ -88,19 +88,5 @@ module.exports = {
       }
     );
   },
-
-  //get user by email
-  getUserByEmail: (email, callback) => {
-    pool.query(
-      "SELECT * FROM `users` WHERE email = ?",
-      [email],
-      (error, results, fields) => {
-        if (error) {
-          return callback(error);
-        }
-        return callback(results);
-      }
-    );
-  },
   
 };

@@ -13,7 +13,6 @@ router.post('/',validateToken, createUser);
 router.get('/',validateToken, getAllUsers);
 router.get('/:id',validateToken, getUserById);
 router.delete('/:id',validateToken, deleteUser);
-router.post('/login', login);
 
 
 module.exports = router;
