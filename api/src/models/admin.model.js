@@ -45,4 +45,18 @@ module.exports = {
       }
     );
   },
+
+  //search weather admin exists by id
+  getAdminById: (id, callback) => {
+    pool.query(
+      "SELECT * FROM `admin` WHERE id = ?",
+      [id],
+      (error, results, fields) => {
+        if (error) {
+          return callback(error);
+        }
+        return callback(results);
+      }
+    );
+  }
 };

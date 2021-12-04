@@ -61,34 +61,25 @@ module.exports = {
   },
 
   refreshToken: (req, res) => {
-    const body = req.body;
-    verify(body.refreshToken, process.env.JWT_KEY, (err, user) => {
-      if (err)
-        return res.status(401).json({
-          errorMessage: "Invalid Token",
-        });
-      else {
-        const accessToken = sign(
-          {
-            id: user.id,
-            userName: user.userName,
-          },
-          process.env.JWT_KEY,
-          { expiresIn: "24h" }
-        );
-        const refreshToken = sign(
-          {
-            id: user.id,
-            userName: user.userName,
-          },
-          process.env.JWT_KEY,
-          { expiresIn: "2d" }
-        );
-        res.status(200).json({
-          accessToken: accessToken,
-          refreshToken: refreshToken,
-        });
-      }
+    const accessToken = sign(
+      {
+        id: req.loggedUserID,
+        userName: req.loggedUserName,
+      },
+      process.env.JWT_KEY,
+      { expiresIn: "24h" }
+    );
+    const refreshToken = sign(
+      {
+        id: req.loggedUserID,
+        userName: req.loggedUserName,
+      },
+      process.env.JWT_KEY,
+      { expiresIn: "2d" }
+    );
+    res.status(200).json({
+      accessToken: accessToken,
+      refreshToken: refreshToken,
     });
   },
 };

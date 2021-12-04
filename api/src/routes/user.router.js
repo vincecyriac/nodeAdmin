@@ -2,8 +2,7 @@ const  {
     createUser,
     getAllUsers,
     getUserById,
-    deleteUser,
-    login
+    deleteUser
  } = require('../controllers/user.controller'); 
 const router = require('express').Router();
 const { validateToken } = require("../auth/tokenValidator")

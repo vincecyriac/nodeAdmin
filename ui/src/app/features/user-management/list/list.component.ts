@@ -11,11 +11,18 @@ export class ListComponent implements OnInit {
   constructor(private userService : UserManagementService) { }
 
   ngOnInit(): void {
+    this.getAllUsers();
   }
 
   //function to fetch all users from service
   getAllUsers() {
-    //call service to fetch all users
+    this.userService.getUserList().subscribe((Response) => {
+      console.log(Response);
+    },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
 

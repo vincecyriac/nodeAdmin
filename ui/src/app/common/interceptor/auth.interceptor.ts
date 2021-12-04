@@ -54,15 +54,15 @@ export class AuthInterceptor implements HttpInterceptor {
     if (objRequest.url.includes('/admin/login') || objRequest.url.includes('admin/refreshToken')) {
       return objRequest.clone({
         setHeaders: {
-          'Content-Type': `application/json; charset=utf-8`,
+          'Content-Type': `application/json; charset=utf-8`
         }
       })
     }
     return objRequest.clone({
-      withCredentials: true,
       setHeaders: {
         'Content-Type': `application/json; charset=utf-8`,
-        'Authorization': `token ${access_token}`
+        'Authorization': `token ${access_token}`,
+        
       }
     })
   }
@@ -80,10 +80,10 @@ export class AuthInterceptor implements HttpInterceptor {
       return this.objLogin.refreshLogin().pipe(
         switchMap((objToken: any) => {
           this.isRefreshing = false;
-          this.objLogin.saveToken(objToken.accessToken['value'], objToken.accessToken['value']);
-          this.refreshTokenSubject$.next(objToken.accessToken['value']);
+          this.objLogin.saveToken(objToken.accessToken, objToken.accessToken);
+          this.refreshTokenSubject$.next(objToken.accessToken);
           return objNext.handle(
-            this.addToken(objRequest, objToken.accessToken['value'])
+            this.addToken(objRequest, objToken.accessToken)
           );
         }),
         catchError((objError: any) => {
