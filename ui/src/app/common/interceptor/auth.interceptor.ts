@@ -62,7 +62,6 @@ export class AuthInterceptor implements HttpInterceptor {
       setHeaders: {
         'Content-Type': `application/json; charset=utf-8`,
         'Authorization': `token ${access_token}`,
-        
       }
     })
   }
@@ -95,7 +94,7 @@ export class AuthInterceptor implements HttpInterceptor {
     }
     else {
       /**
-       * if refreshing (getting new access token) is in progress then block the upcoming all other request 
+       * if refreshing (getting new access token) is in progress then block the upcoming all other request
        * till a new valid acess token is emitting by refresh token subject
        */
       return this.refreshTokenSubject$.pipe(

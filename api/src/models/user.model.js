@@ -42,7 +42,7 @@ module.exports = {
   //get all users
   getAllUsers: (pagination, callback) => {
     const page = parseInt(pagination.page) || 1;
-    const limit = parseInt(pagination.limit) || 10;
+    const limit = parseInt(pagination.limit) || 100;
     const offset = (page - 1) * limit;
     pool.query(
       "SELECT id,firstName,lastName,email,gender,number,createdAt,updatedAt FROM `users` LIMIT ?,?",

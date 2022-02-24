@@ -1,1 +1,49 @@
-<p>list works!</p>
+<div class="container mt-5">
+  <div class="d-flex justify-space-between">
+    <h2>updates</h2>
+    <button  *ngIf="!onRoom" type="button" class="btn btn-primary" (click)="joinRoom()">join room</button>
+    <button  *ngIf="onRoom" type="button" class="btn btn-primary" (click)="leaveRoom()">leave room</button>
+  </div>
+  <div class="row mt-4" *ngIf="onRoom">
+    <div class="col-6"><input type="textBox" #text class="form-control"></div>
+    <div class="col-md-2"><button type="submit" class="btn btn-secondary" (click)="sendUpdates(text.value)">Send</button></div>
+  </div>
+  <div class="row mt-3" *ngIf="onRoom">
+    <ul>
+      <li *ngFor="let update of arrUpdates">{{update}}</li>
+    </ul>
+  </div>
+  <div class="d-flex mt-5 justify-space-between">
+    <h2>USERS</h2>
+    <button type="button" class="btn btn-primary" (click)="createUser()">New user</button>
+  </div>
+  <div class="row mt-4">
+    <div class="col-12">
+      <div class="alert alert-primary d-flex justify-space-between align-items-center" role="alert"
+        *ngIf="userListSocket">
+        <span>there are new updates, Click refresh to update</span>
+        <span><button type="button" class="btn btn-sm btn-secondary" (click)="getAllUsers()">refresh</button></span>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">name</th>
+            <th scope="col">email</th>
+            <th scope="col">gender</th>
+            <th scope="col">number</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of arrUserList">
+            <td>{{user.id}}</td>
+            <td>{{user.firstName}} {{user.lastName}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.gender == 0 ? 'male' : "female"}}</td>
+            <td>{{user.number}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

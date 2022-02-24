@@ -7,6 +7,8 @@ const {
   deleteUser,
   getUserByEmail,
 } = require("../models/user.model");
+const { uiSocket } = require("../webSocket/socket");
+
 
 module.exports = {
   createUser: (req, res) => {
@@ -16,6 +18,8 @@ module.exports = {
     createUser(body, (err, data) => {
       if (err) {
         res.status(500).json(err);
+        global.io.emit("updateUser", {})
+        //boradcast to all users
       } else {
         res.status(200).json();
       }

@@ -37,4 +37,14 @@ app.use("/api/user", userRouter);
 
 
 //listen for requests
-app.listen(port, () => console.log(`Listening on port ${port}`));
+const server =app.listen(port, () => console.log(`Listening on port ${port}`));
+
+//socket connection
+var socket = require('socket.io')
+var { uiSocket } = require('./src/webSocket/socket');
+var io = socket(server, {cors: {origin: "*"}});
+uiSocket(io);
+global.io = io
+module.exports = {
+  socket
+}
